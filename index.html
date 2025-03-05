@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <title>JM Carpintaria - Planilhas</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      text-decoration: none;
+      border: none;
+    }
+
+    .title {
+      text-align: center;
+      padding: 20px;
+      background-color: black;
+      color: white;
+    }
+
+    #search {
+      width: 100%;
+      padding: 40px;
+      font-size: 16px;
+      box-sizing: border-box;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      width: calc(100% - 20px);
+      border: 1px solid black;
+      padding: 10px 10px 5px 10px;
+      border-radius: 10px;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      text-align: center;
+    }
+
+    li {
+      background-color: rgb(44, 44, 44);
+      padding: 20px;
+    }
+
+    a {
+      text-decoration: none;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .link-details {
+      margin-top: 10px;
+      display: none;
+      flex-direction: column;
+      background-color: #fff;
+      padding: 10px;
+      gap: 10px;
+    }
+
+    #agenda {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+
+    .link-details a {
+      color: black;
+    }
+
+    .highlight {
+      background-color: yellow;
+      color: black;
+    }
+
+    /* Estilo do overlay de bloqueio */
+    #lockOverlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      flex-direction: column;
+    }
+
+    #lockOverlay input {
+      margin-top: 10px;
+      max-width: 300px;
+    }
+
+    /* Enquanto bloqueado, o conteúdo ficará borrado */
+    #content.locked {
+      filter: blur(5px);
+      pointer-events: none;
+      user-select: none;
+    }
+
+    button {
+      background-color: black;
+      color: white;
+      padding: 10px;
+      margin-top: 10px;
+      width: 320px;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Overlay de bloqueio -->
+  <div id="lockOverlay">
+    <h2>Digite a senha para desbloquear</h2>
+    <input type="password" id="password-input" placeholder="Senha">
+    <button id="unlock-btn">Desbloquear</button>
+    <p id="lock-msg" style="color:red; display:none; margin-top:10px;">Senha incorreta!</p>
+  </div>
+
+  <!-- Conteúdo da página -->
+  <div id="content" class="locked">
+    <h1 class="title">JM Carpintaria - Planilhas</h1>
+    <div id="search">
+      <input type="text" id="search-box" placeholder="Buscar...">
+    </div>
+    <ul id="linkList">
+      <li>
+        <a href="#" class="link" data-url="https://exemplo.com/embiaxo">Fluxo de Caixa</a>
+        <div class="link-details">
+          <a href="https://docs.google.com/spreadsheets/d/1vPDMHjg2HVB1UYlcMup3FkH6szMiO6opmUzp48Rjw8Q/edit?gid=0#gid=0"
+            target="_blank">2024</a>
+          <a href="https://docs.google.com/spreadsheets/d/1vPDMHjg2HVB1UYlcMup3FkH6szMiO6opmUzp48Rjw8Q/edit?gid=977106783#gid=977106783"
+            target="_blank">Janeiro</a>
+          <a href="https://docs.google.com/spreadsheets/d/1vPDMHjg2HVB1UYlcMup3FkH6szMiO6opmUzp48Rjw8Q/edit?gid=402050632#gid=402050632"
+            target="_blank">Fevereiro</a>
+          <a href="https://docs.google.com/spreadsheets/d/1vPDMHjg2HVB1UYlcMup3FkH6szMiO6opmUzp48Rjw8Q/edit?gid=783675646#gid=783675646"
+            target="_blank">Março</a>
+          <a href="https://docs.google.com/spreadsheets/d/13dmjPzhlgpGz4DeahgTcD9OoCgs5BvjdVGyMIxoEgqE/edit?gid=2056550452#gid=2056550452"
+            target="_blank">Diaria Março</a>
+          <a href="https://docs.google.com/spreadsheets/d/1AGqobiO44WO0PdV5TAcF4Env9yHB_TXC/edit?gid=1066799926#gid=1066799926"
+            target="_blank">DRE</a>
+          <a href="https://docs.google.com/spreadsheets/d/13dmjPzhlgpGz4DeahgTcD9OoCgs5BvjdVGyMIxoEgqE/edit?gid=523467121#gid=523467121"
+            target="_blank">DRE (nova)</a>
+        </div>
+      </li>
+      <li>
+        <a href="#" class="link" data-url="https://exemplo.com/fluxo-de-caixa">Contas</a>
+        <div class="link-details">
+          <a href="https://docs.google.com/spreadsheets/d/1vPDMHjg2HVB1UYlcMup3FkH6szMiO6opmUzp48Rjw8Q/edit?gid=605968124#gid=605968124"
+            target="_blank">Pagar</a>
+          <a href="https://docs.google.com/spreadsheets/d/1vPDMHjg2HVB1UYlcMup3FkH6szMiO6opmUzp48Rjw8Q/edit?gid=847307562#gid=847307562"
+            target="_blank">Receber</a>
+        </div>
+      </li>
+      <li>
+        <a href="#" class="link" data-url="https://exemplo.com/caixotes">Agenda</a>
+        <div class="link-details" id="agenda">
+          <a href="https://docs.google.com/spreadsheets/d/1_C46O-D39DCaoZoi_dmCoySQM1FIvErUG3UDzKJweWU/edit?gid=1168924825#gid=1168924825"
+            target="_blank">Janeiro</a>
+          <a href="https://docs.google.com/spreadsheets/d/1_C46O-D39DCaoZoi_dmCoySQM1FIvErUG3UDzKJweWU/edit?gid=323279118#gid=323279118"
+            target="_blank">Fevereiro</a>
+          <a href="https://docs.google.com/spreadsheets/d/1_C46O-D39DCaoZoi_dmCoySQM1FIvErUG3UDzKJweWU/edit?gid=1818581960#gid=1818581960"
+            target="_blank">Março</a>
+          <a href="https://docs.google.com/spreadsheets/d/1_C46O-D39DCaoZoi_dmCoySQM1FIvErUG3UDzKJweWU/edit?gid=1231223221#gid=1231223221"
+            target="_blank">Abril</a>
+          <a href="https://docs.google.com/spreadsheets/d/1_C46O-D39DCaoZoi_dmCoySQM1FIvErUG3UDzKJweWU/edit?gid=594166576#gid=594166576"
+            target="_blank">Maio</a>
+          <a href="https://docs.google.com/spreadsheets/d/1_C46O-D39DCaoZoi_dmCoySQM1FIvErUG3UDzKJweWU/edit?gid=734842371#gid=734842371"
+            target="_blank">Junho</a>
+          <a href="https://docs.google.com/spreadsheets/d/1_C46O-D39DCaoZoi_dmCoySQM1FIvErUG3UDzKJweWU/edit?gid=735708827#gid=735708827"
+            target="_blank">Julho</a>
+          <a href="https://docs.google.com/spreadsheets/d/1_C46O-D39DCaoZoi_dmCoySQM1FIvErUG3UDzKJweWU/edit?gid=1371857491#gid=1371857491"
+            target="_blank">Agosto</a>
+          <a href="https://docs.google.com/spreadsheets/d/1_C46O-D39DCaoZoi_dmCoySQM1FIvErUG3UDzKJweWU/edit?gid=1694781238#gid=1694781238"
+            target="_blank">Setembro</a>
+          <a href="https://docs.google.com/spreadsheets/d/1_C46O-D39DCaoZoi_dmCoySQM1FIvErUG3UDzKJweWU/edit?gid=1365684936#gid=1365684936"
+            target="_blank">Outubro</a>
+          <a href="https://docs.google.com/spreadsheets/d/1_C46O-D39DCaoZoi_dmCoySQM1FIvErUG3UDzKJweWU/edit?gid=1133775167#gid=1133775167"
+            target="_blank">Novembro</a>
+          <a href="https://docs.google.com/spreadsheets/d/1_C46O-D39DCaoZoi_dmCoySQM1FIvErUG3UDzKJweWU/edit?gid=120928616#gid=120928616"
+            target="_blank">Dezembro</a>
+        </div>
+      </li>
+      <li>
+        <a href="#" class="link" data-url="https://exemplo.com/caixas">Custos e Comissões</a>
+        <div class="link-details">
+          <a href="https://docs.google.com/spreadsheets/d/1utwB8QvEwzlyYAlZu3ZmInuU_AaD64kT/edit?gid=1569577737#gid=1569577737"
+            target="_blank">Planilha Custos</a>
+          <a href="https://docs.google.com/spreadsheets/d/1utwB8QvEwzlyYAlZu3ZmInuU_AaD64kT/edit?gid=601700873#gid=601700873"
+            target="_blank">Tabela Comissões</a>
+          <a href="https://docs.google.com/spreadsheets/d/1-otN9bKwWoL50pZWW41l4GlGGzJRazrxRHDJyUInGqg/edit?gid=1076410991#gid=1076410991"
+            target="_blank">Planilha Comissões André</a>
+        </div>
+      </li>
+      <li>
+        <a href="#" class="link" data-url="https://exemplo.com/caixas">Parceiros</a>
+        <div class="link-details">
+          <a href="https://docs.google.com/spreadsheets/d/1-otN9bKwWoL50pZWW41l4GlGGzJRazrxRHDJyUInGqg/edit?gid=0#gid=0"
+            target="_blank">Vendas André</a>
+        </div>
+      </li>
+      <li>
+        <a href="#" class="link" data-url="https://exemplo.com/caixas">Tabela Venda</a>
+        <div class="link-details">
+          <a href="https://docs.google.com/spreadsheets/d/13dmjPzhlgpGz4DeahgTcD9OoCgs5BvjdVGyMIxoEgqE/edit?gid=980122829#gid=980122829"
+            target="_blank">Venda</a>
+          <a href="https://drive.google.com/file/d/19Z7COydILO2Kr1Wl5rz_eBS8ky-ZCTl1/view" target="_blank">Revenda
+            Dalcomad</a>
+          <a href="https://drive.google.com/file/d/16chDGz7vR5SXKS0BGU6_SP76vPBVScJv/view" target="_blank">Revenda
+            Abrilar</a>
+          <a href="https://drive.google.com/file/d/1hT-PxDeWqoSo__vh0xTgfVzPjAjy1_JD/view" target="_blank">Revenda KIT
+            Abrilar</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <script>
+    function escapeRegExp(string) {
+      return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    }
+    function highlightText(text, words) {
+      if (!words || words.length === 0) return text;
+      words.forEach(function (word) {
+        if (word !== "") {
+          const regex = new RegExp(escapeRegExp(word), "gi");
+          text = text.replace(regex, function (match) {
+            return `<span class="highlight">${match}</span>`;
+          });
+        }
+      });
+      return text;
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      const lockOverlay = document.getElementById('lockOverlay');
+      const passwordInput = document.getElementById('password-input');
+      const unlockBtn = document.getElementById('unlock-btn');
+      const lockMsg = document.getElementById('lock-msg');
+      const content = document.getElementById('content');
+      const correctPassword = "Jm@42440";
+
+      if (sessionStorage.getItem('unlocked')) {
+        lockOverlay.style.display = "none";
+        content.classList.remove('locked');
+      }
+
+      unlockBtn.addEventListener('click', function () {
+        if (passwordInput.value === correctPassword) {
+          lockOverlay.style.display = "none";
+          content.classList.remove('locked');
+          sessionStorage.setItem('unlocked', 'true');
+        } else {
+          lockMsg.style.display = "block";
+        }
+      });
+
+      passwordInput.addEventListener("keydown", function (event) {
+        if (event.key === "Enter") {
+          unlockBtn.click();
+        }
+      });
+
+      const searchInput = document.getElementById('search-box');
+      const listItems = document.querySelectorAll('#linkList li');
+      const links = document.querySelectorAll('.link');
+
+      links.forEach(function (link) {
+        link.dataset.original = link.textContent;
+      });
+      const detailAnchors = document.querySelectorAll('.link-details a');
+      detailAnchors.forEach(function (anchor) {
+        anchor.dataset.original = anchor.textContent;
+      });
+
+      searchInput.addEventListener('input', function () {
+        const query = this.value.trim().toLowerCase();
+        const words = query.split(/\s+/).filter(Boolean);
+
+        listItems.forEach(function (li) {
+          const mainLink = li.querySelector('.link');
+          const mainOriginal = mainLink.dataset.original;
+          const mainTextLower = mainOriginal.toLowerCase();
+
+          const detailsElement = li.querySelector('.link-details');
+          let detailsOriginal = "";
+          if (detailsElement) {
+            const anchors = detailsElement.querySelectorAll('a');
+            anchors.forEach(function (a) {
+              detailsOriginal += a.dataset.original + " ";
+            });
+          }
+          const detailsTextLower = detailsOriginal.toLowerCase();
+
+          const combinedText = mainTextLower + " " + detailsTextLower;
+          const match = words.every(word => combinedText.includes(word));
+          li.style.display = match ? "" : "none";
+
+          if (detailsElement) {
+            if (query !== "" && words.some(word => detailsTextLower.includes(word))) {
+              detailsElement.style.display = "flex";
+            } else {
+              detailsElement.style.display = "none";
+            }
+          }
+
+          mainLink.innerHTML = highlightText(mainOriginal, words);
+          if (detailsElement) {
+            const anchors = detailsElement.querySelectorAll('a');
+            anchors.forEach(function (a) {
+              a.innerHTML = highlightText(a.dataset.original, words);
+            });
+          }
+        });
+      });
+
+      links.forEach(function (link) {
+        link.addEventListener('click', function (e) {
+          e.preventDefault();
+          if (document.getElementById('search-box').value.trim() === "") {
+            const details = this.nextElementSibling;
+            if (details) {
+              details.style.display = details.style.display === "none" || details.style.display === "" ? "flex" : "none";
+            }
+          }
+        });
+      });
+    });
+  </script>
+</body>
+
+</html>
