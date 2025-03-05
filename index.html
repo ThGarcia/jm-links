@@ -78,7 +78,6 @@
       color: black;
     }
 
-    /* Estilo do overlay de bloqueio */
     #lockOverlay {
       position: fixed;
       top: 0;
@@ -98,7 +97,6 @@
       max-width: 300px;
     }
 
-    /* Enquanto bloqueado, o conteúdo ficará borrado */
     #content.locked {
       filter: blur(5px);
       pointer-events: none;
@@ -113,11 +111,18 @@
       width: 320px;
       border-radius: 10px;
     }
+
+    @media screen and (max-width: 768px) {
+      #agenda {
+        display: grid !important;
+        grid-template-columns: repeat(6, 1fr);
+        gap: 10px;
+      }
+    }
   </style>
 </head>
 
 <body>
-  <!-- Overlay de bloqueio -->
   <div id="lockOverlay">
     <h2>Digite a senha para desbloquear</h2>
     <input type="password" id="password-input" placeholder="Senha">
@@ -125,7 +130,6 @@
     <p id="lock-msg" style="color:red; display:none; margin-top:10px;">Senha incorreta!</p>
   </div>
 
-  <!-- Conteúdo da página -->
   <div id="content" class="locked">
     <h1 class="title">JM Carpintaria - Planilhas</h1>
     <div id="search">
